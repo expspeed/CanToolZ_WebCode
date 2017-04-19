@@ -1,0 +1,32 @@
+.scenario {
+  position: relative;
+}
+
+.step {
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.step.current {
+  background-color: lightsteelblue;
+}
+
+.logo {
+  height: auto;
+  max-width: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-group-addon:first-child:last-child {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.command-run {
+    border: 2 none;
+    background-color: rgb(233,233,226);
+    font-weight: 10;
+    font-size: 1;
+}
