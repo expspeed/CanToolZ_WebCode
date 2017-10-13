@@ -19,7 +19,8 @@ setup(
     install_requires=[
         'pyserial',
         'mido',
-        'numpy','bitstring'
+        'numpy',
+        'bitstring'
     ],
     author_email='alex.sintsov@gmail.com',
     packages=['cantoolz', 'cantoolz.stream', 'cantoolz.utils', 'cantoolz.modules'],

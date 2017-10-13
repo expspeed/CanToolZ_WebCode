@@ -42,6 +42,16 @@ class mod_stat(CANModule):
         return "Active status: " + str(self._active)
 
     def get_status(self, def_in = 0):
+        print('\n**********************************************************************************************************\n')
+        '''
+        print(type(self.all_frames[0]['buf']))
+        if self._index >= 1:
+            print(self.all_frames[1]['buf'])
+            for timestmp, can_msg in self.all_frames[0]['buf']:
+                print(can_msg.CANFrame.frame_data)
+                print(len(can_msg.CANFrame.frame_data)) #bool ?????
+        '''
+        print('\n**********************************************************************************************************\n')
         return "Current status: " + "\nActive STATCHECK running:" + str(self._active_check) + "\nSniffed frames (overall): " + str(self.get_num(-1))+"\nCurrent BUFF: index - " + str(self._index) + " name - " + self.all_frames[self._index]['name'] + \
                "\nAll buffers: \n\t" + \
             '\n\t'.join([buf['name'] + "\n\t\tindex: " + str(cnt) + ' sniffed: ' + str(len(buf['buf'])) for buf,cnt in zip(self.all_frames,range(0,len(self.all_frames)))])
@@ -738,6 +748,26 @@ class mod_stat(CANModule):
         for row in rows:
             table += format_table % tuple(row) + "\n"
         table += ""
+        print('\n******************************************************************\n')
+        FinalDirectList = []
+        SingalDirect = {}
+        for row in rows:
+            SingalDirect['bus'] = row[0]
+            SingalDirect['ID'] = row[1]
+            SingalDirect['length'] = row[2]
+            SingalDirect['message'] = row[3]
+            SingalDirect['ascii'] = row[4]
+            SingalDirect['descr'] = row[5]
+            SingalDirect['count'] = row[6]
+            #print(SingalDirect)
+            FinalDirectList.append(SingalDirect)
+            SingalDirect = {}
+        '''
+        for items in FinalDirectList:
+            print(items['bus'] + ':bus   ' + items['ID'] + ':ID   ' + items['length'] + ':length   ' + items['message'] + ':message   ' + items['ascii'] + ':ascii   ' + items['descr'] + ':descr   ' + items['count'] + ':count')
+        print("type of FinalDirectList:"+ str(type(FinalDirectList)))
+        '''
+        print('\n******************************************************************\n')
         return table
 
     def do_clean(self, def_in):

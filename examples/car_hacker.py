@@ -4,7 +4,6 @@ load_modules = {
     'uds_engine_auth_baypass': {
          'id_command': 0x71
     },
-
     'gen_ping' :    {},
 
 
