@@ -768,7 +768,8 @@ class mod_stat(CANModule):
         print("type of FinalDirectList:"+ str(type(FinalDirectList)))
         '''
         print('\n******************************************************************\n')
-        return table
+        #return table
+        return FinalDirectList
 
     def do_clean(self, def_in):
         self.all_frames = [{'name':'start_buffer','buf':Replay()}]

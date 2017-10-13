@@ -170,6 +170,12 @@ class WebConsole(http.server.SimpleHTTPRequestHandler):
                     traceback.print_exc()
 
         self.send_response(resp_code)
+        # this is new code ,if don't work ,delete it   --LouisozZ  **********************************************************************
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS,DELETE,PUT")
+        self.send_header("Access-Control-Allow-Headers", "Test")
+        # this is new code ,if don't work ,delete it   --LouisozZ  **********************************************************************
+        
         self.send_header('X-Clacks-Overhead', 'GNU Terry Pratchett')
         self.send_header('Content-Type', cont_type)
         self.send_header('Connection', 'closed')
