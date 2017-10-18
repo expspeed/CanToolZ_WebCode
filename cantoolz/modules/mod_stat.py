@@ -751,16 +751,35 @@ class mod_stat(CANModule):
         print('\n******************************************************************\n')
         FinalDirectList = []
         SingalDirect = {}
+        RseponseString = ""
+        temp_str = ""
         for row in rows:
-            SingalDirect['bus'] = row[0]
-            SingalDirect['ID'] = row[1]
-            SingalDirect['length'] = row[2]
-            SingalDirect['message'] = row[3]
-            SingalDirect['ascii'] = row[4]
-            SingalDirect['descr'] = row[5]
-            SingalDirect['count'] = row[6]
+            RseponseString = RseponseString + "{";
+            RseponseString = RseponseString + "\"bus\":\"" + str(row[0]) + "\",";
+            RseponseString = RseponseString + "\"ID\":\"" + str(row[1]) + "\",";
+            RseponseString = RseponseString + "\"length\":\"" + str(row[2]) + "\",";
+            RseponseString = RseponseString + "\"message\":\"" + str(row[3]) + "\","; 
+            temp_str = str(row[4]);
+            temp_str_split_arr = temp_str.split('\\');
+            for for_temp_str in temp_str_split_arr:
+                if for_temp_str == temp_str_split_arr[0]:
+                    temp_str = temp_str_split_arr[0];
+                else:
+                     temp_str = temp_str + '\\\\' + for_temp_str
+            
+            temp_str_split_arr = temp_str.split('"');
+            for for_temp_str in temp_str_split_arr:
+                if for_temp_str == temp_str_split_arr[0]:
+                    temp_str = temp_str_split_arr[0];
+                else:
+                     temp_str = temp_str + '\\"' + for_temp_str            
+            RseponseString = RseponseString + "\"ascii\":\"" + temp_str + "\",";
+            RseponseString = RseponseString + "\"descr\":\"" + str(row[5]) + "\",";
+            RseponseString = RseponseString + "\"count\":\"" + str(row[6]) + "\"";
+            RseponseString = RseponseString + "}#$~$#";
+            
             #print(SingalDirect)
-            FinalDirectList.append(SingalDirect)
+            #FinalDirectList.append(SingalDirect)
             SingalDirect = {}
         '''
         for items in FinalDirectList:
@@ -769,7 +788,7 @@ class mod_stat(CANModule):
         '''
         print('\n******************************************************************\n')
         #return table
-        return FinalDirectList
+        return RseponseString
 
     def do_clean(self, def_in):
         self.all_frames = [{'name':'start_buffer','buf':Replay()}]
