@@ -73,7 +73,13 @@ class gen_fuzz(CANModule):
                     _body2 = list(args.get('data', []))
 
                     bytes_to_fuzz = args.get('index',range(0,len(_body2)))
+                    print("---------------------------------------------")
+                    print("index:")
+                    print(bytes_to_fuzz);
                     bytez_for_fuzz = args.get('bytes',None)
+                    print("bytes:")
+                    print(bytez_for_fuzz);
+                    print("---------------------------------------------")
 
                     if not bytez_for_fuzz:
                         fuzz_list = range(0, 255)
